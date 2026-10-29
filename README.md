@@ -23,7 +23,7 @@ Comparação empírica entre os dois modos de operação do NATS em cenário de 
 |--------|------------------|--------|
 | 1 — ? | NATS Core + resultados do Core | `core/` + partes de `app/` |
 | 2 — ? | NATS JetStream + resultados do JetStream | `jetstream/` + partes de `app/` |
-| 3 — ? | Análise comparativa, artigo, slides | `analysis/`, `artigo/` |
+| 3 — Rodrigo Felitti | Análise comparativa, artigo, slides | `analysis/`, `artigo/` |
 
 *(ajustar nomes conforme combinarmos)*
 
