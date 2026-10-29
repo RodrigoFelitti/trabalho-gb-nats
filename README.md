@@ -21,9 +21,9 @@ Comparação empírica entre os dois modos de operação do NATS em cenário de 
 
 | Pessoa | Responsabilidade | Pastas |
 |--------|------------------|--------|
-| 1 — Rodrigo? | NATS Core + resultados do Core | `core/` + partes de `app/` |
-| 2 — Pedro? | NATS JetStream + resultados do JetStream | `jetstream/` + partes de `app/` |
-| 3 — Ramiro? | Análise comparativa, artigo, slides | `analysis/`, `artigo/` |
+| 1 — ? | NATS Core + resultados do Core | `core/` + partes de `app/` |
+| 2 — ? | NATS JetStream + resultados do JetStream | `jetstream/` + partes de `app/` |
+| 3 — ? | Análise comparativa, artigo, slides | `analysis/`, `artigo/` |
 
 *(ajustar nomes conforme combinarmos)*
 
