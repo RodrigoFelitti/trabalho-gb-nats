@@ -3,13 +3,8 @@ Serviço de alerta — request/reply.
 
 Exercita o padrão request/reply do NATS (seção 3.3 do artigo do GA).
 Quem pergunta faz request para `alertas.verificar` e este serviço responde
-se deve disparar alerta ou não. Fica fora do consumer para não distorcer
-a latência medida nos cenários (ver cenário 'alerta' no runner).
-
-TODO (Pessoa 1 e 2):
-- Implementar função `run_alert_service(modo, duracao_s)`
-- Assinar SUBJECT_ALERTA_REQUEST e responder via reply inbox
-- Lógica simples: se valor > LIMITE_ALERTA, responde {"alerta": true}
+se deve disparar alerta ou não. Nos cenários de medição fica desligado por
+padrão (ver `com_alerta` no consumer e o cenário 'alerta' no runner).
 """
 
 import asyncio

@@ -3,17 +3,12 @@ Runner dos cenários de teste para o NATS Core.
 
 Orquestra sensores, consumers e serviço de alerta para executar
 cada um dos cenários-base do CONTRATO.md.
-
-TODO (Pessoa 1):
-- Cenário 'vazao': 1 publisher, 1 subscriber, variar tamanho (100B, 1KB, 10KB)
-- Cenário 'escalabilidade': variar nº publishers (1, 10, 50), 3 subs em queue group
-- Cenário 'resiliencia': publisher a 500 msg/s por 60s, derrubar sub nos s 20-50
-- Gerar CSV em results/ no formato combinado
 """
 
 import argparse
 import asyncio
 import csv
+import gzip
 import json
 import sys
 from pathlib import Path
@@ -31,7 +26,7 @@ COLUNAS = ["cenario", "modo", "tamanho_msg", "n_publishers", "n_subscribers",
 
 def salvar_csv(linhas, nome_arquivo):
     caminho = Path(__file__).parent / "results" / nome_arquivo
-    with open(caminho, "w", newline="") as f:
+    with gzip.open(caminho, "wt", newline="") as f:
         escritor = csv.writer(f)
         escritor.writerow(COLUNAS)
         escritor.writerows(linhas)
@@ -52,7 +47,7 @@ async def cenario_vazao():
         for lat in latencias:
             linhas.append(["vazao", "core", tamanho, 1, 1, lat, 60000, len(latencias), 60])
 
-    salvar_csv(linhas, "resultados_core_vazao.csv")
+    salvar_csv(linhas, "resultados_core_vazao.csv.gz")
 
 
 async def cenario_escalabilidade():
@@ -77,7 +72,7 @@ async def cenario_escalabilidade():
             linhas.append(["escalabilidade", "core", 1000, n_pubs, 3, lat,
                            500 * 60 * n_pubs, len(latencias), 60])
 
-    salvar_csv(linhas, "resultados_core_escalabilidade.csv")
+    salvar_csv(linhas, "resultados_core_escalabilidade.csv.gz")
 
 
 async def cenario_resiliencia():
@@ -100,7 +95,7 @@ async def cenario_resiliencia():
     for lat in latencias:
         linhas.append(["resiliencia", "core", 1000, 1, 1, lat, 500 * 60, len(latencias), 60])
 
-    salvar_csv(linhas, "resultados_core_resiliencia.csv")
+    salvar_csv(linhas, "resultados_core_resiliencia.csv.gz")
 
 
 async def cenario_alerta():

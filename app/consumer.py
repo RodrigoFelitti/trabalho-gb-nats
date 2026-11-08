@@ -4,20 +4,19 @@ Consumer — subscriber que processa leituras dos sensores.
 Assina `sensores.>` e processa cada mensagem. Mede latência fim-a-fim
 comparando timestamp do payload com o momento da recepção.
 
-Suporta modo core (nc.subscribe) e modo jetstream (js.subscribe com consumer).
-
 Pode operar em queue group (para o cenário de escalabilidade).
 
-TODO (Pessoa 1 e 2):
-- Implementar função `run_consumer(modo, duracao_s, queue_group=None, com_alerta=False)`
-- Devolver a latência de cada mensagem (o runner grava o CSV combinado, ver CONTRATO.md)
-- Suportar ser derrubado graciosamente (SIGTERM) para o teste de resiliência
+Devolve a latência de cada mensagem; quem grava o CSV é o runner.
+
+Falta (Pessoa 2): suportar modo jetstream (js.subscribe com consumer).
 """
 
 import asyncio
-import nats
 import json
 from datetime import datetime, timezone
+
+import nats
+
 from app import config
 
 async def run_consumer(modo: str, duracao_s: float, queue_group: str = None,
