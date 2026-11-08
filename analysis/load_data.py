@@ -21,7 +21,11 @@ JETSTREAM_RESULTS_DIR = Path(__file__).parent.parent / "jetstream" / "results"
 def load_all() -> pd.DataFrame:
     """Carrega todos os CSVs e retorna um DataFrame único."""
     dfs = []
-    for csv in list(CORE_RESULTS_DIR.glob("*.csv")) + list(JETSTREAM_RESULTS_DIR.glob("*.csv")):
+    # Aceita .csv e .csv.gz (os CSVs grandes vão compactados para caber no GitHub)
+    arquivos = []
+    for pasta in (CORE_RESULTS_DIR, JETSTREAM_RESULTS_DIR):
+        arquivos += list(pasta.glob("*.csv")) + list(pasta.glob("*.csv.gz"))
+    for csv in arquivos:
         dfs.append(pd.read_csv(csv))
     if not dfs:
         raise FileNotFoundError("Nenhum CSV encontrado — rode os cenários primeiro.")

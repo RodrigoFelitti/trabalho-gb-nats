@@ -22,7 +22,9 @@ Combinados para que as três partes do trabalho sejam compatíveis entre si. **Q
 
 ## 4. Formato CSV de saída (OBRIGATÓRIO — mesmo nos dois lados)
 
-Nome do arquivo: `resultados_<modo>_<cenario>.csv` (ex: `resultados_core_vazao.csv`)
+Nome do arquivo: `resultados_<modo>_<cenario>.csv.gz` (ex: `resultados_core_vazao.csv.gz`)
+
+Compactado com gzip porque o CSV de escalabilidade passa de 100 MB (limite do GitHub). O pandas lê direto: `pd.read_csv("arquivo.csv.gz")`. Em Python: `gzip.open(caminho, "wt", newline="")` no lugar de `open(...)`.
 
 Colunas:
 
